@@ -16,6 +16,13 @@ vim.lsp.config('ts_ls', {
   cmd = { 'typescript-language-server', '--stdio' },
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   root_markers = { 'package.json', 'tsconfig.json', '.git' },
+  -- Fallback TS install for projects without a local `typescript` dependency.
+  -- The global `typescript` is 7.x (native port) and ships no tsserver.js.
+  init_options = {
+    tsserver = {
+      path = vim.fn.expand('~/.local/share/ts5/node_modules/typescript/lib/tsserver.js'),
+    },
+  },
 })
 
 -- Rust
