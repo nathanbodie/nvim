@@ -5,6 +5,10 @@
       "src": "https://github.com/Saghen/blink.cmp",
       "version": "'1.7.0'"
     },
+    "conform.nvim": {
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "evergarden": {
       "rev": "6a47a90e5caf1b21e54ff7967017c255bab80fdd",
       "src": "https://codeberg.org/evergarden/nvim.git"
@@ -64,6 +68,10 @@
     "which-key.nvim": {
       "rev": "370ec46f710e058c9c1646273e6b225acf47cbed",
       "src": "https://github.com/folke/which-key.nvim"
+    },
+    "zk-nvim": {
+      "rev": "922134d8f95f0169bb572b09f2fa643573cb51f8",
+      "src": "https://github.com/zk-org/zk-nvim"
     }
   }
 }

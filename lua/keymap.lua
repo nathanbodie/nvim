@@ -1,13 +1,15 @@
 vim.g.mapleader = ' '
 local map = vim.keymap.set
 
-map('n', '<leader>r', ':update<CR>:source<CR>')
+map('n', '<leader>n', ':update<CR>:source<CR>')
 
 -- system clipboard
 map({ 'n', 'v' }, '<leader>y', '"+y')
 map({ 'n', 'v' }, '<leader>d', '"+d')
 
-map('n', '<leader>lf', vim.lsp.buf.format)
+map('n', '<leader>lf', function()
+  require('conform').format({ lsp_format = 'fallback' })
+end)
 map('n', '<leader>f', '<Cmd>Pick files<CR>')
 map('n', '<leader>r', '<Cmd>Pick buffers<CR>')
 map('n', '<leader>g', '<Cmd>Pick grep_live<CR>')
