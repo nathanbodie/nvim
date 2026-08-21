@@ -1,3 +1,9 @@
+-- Advertise blink.cmp's completion capabilities (resolve + additionalTextEdits)
+-- to every server so auto-import completion items work.
+vim.lsp.config('*', {
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
+})
+
 -- Lua
 vim.lsp.config('lua_ls', {
   cmd = { 'lua-language-server' },
@@ -74,4 +80,26 @@ vim.lsp.enable({
   'ols',
   'clangd',
   'nixd',
+})
+
+-- Re-run LSP attach for open buffers after direnv updates PATH,
+-- so servers from a flake dev shell attach without :e
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'DirenvLoaded',
+  callback = function()
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == '' then
+        local ft = vim.bo[buf].filetype
+        if ft ~= '' then
+          -- Make `buf` the current buffer so ftplugin code that operates on
+          -- buffer 0 (e.g. runtime markdown ftplugin's `vim.treesitter.start()`)
+          -- acts on the right buffer, and scope by `pattern` so only this
+          -- filetype's autocmds fire (never load markdown ftplugin on a nix buf).
+          vim.api.nvim_buf_call(buf, function()
+            vim.api.nvim_exec_autocmds('FileType', { pattern = ft, modeline = false })
+          end)
+        end
+      end
+    end
+  end,
 })

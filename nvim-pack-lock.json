@@ -3,11 +3,15 @@
     "blink.cmp": {
       "rev": "2fcf66aa31e37d4b443c669ec1bf189530dcbf20",
       "src": "https://github.com/Saghen/blink.cmp",
-      "version": "'1.7.0'"
+      "version": "'v1.7.0'"
     },
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "direnv.vim": {
+      "rev": "ab2a7e08dd630060cd81d7946739ac7442a4f269",
+      "src": "https://github.com/direnv/direnv.vim"
     },
     "evergarden": {
       "rev": "6a47a90e5caf1b21e54ff7967017c255bab80fdd",

@@ -6,10 +6,11 @@ vim.pack.add({
   { src = "https://github.com/stevearc/oil.nvim" },
   { src = "https://github.com/folke/which-key.nvim" },
   { src = "https://github.com/rafamadriz/friendly-snippets" },
-  { src = "https://github.com/Saghen/blink.cmp",            version = "1.7.0" },
+  { src = "https://github.com/Saghen/blink.cmp",            version = "v1.7.0" },
   { src = "https://github.com/lewis6991/gitsigns.nvim" },
   { src = "https://github.com/zk-org/zk-nvim" },
-  { src = "https://github.com/stevearc/conform.nvim" }
+  { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/direnv/direnv.vim" }
 })
 
 require("evergarden").setup({
@@ -39,6 +40,17 @@ require("mini.statusline").setup({
       local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
       local git = MiniStatusline.section_git({ trunc_width = 75, icon = vim.fn.nr2char(0xe725) .. " " })
       local filetype = vim.bo.filetype ~= "" and vim.bo.filetype or "no ft"
+      local filename = "%f"
+      local full = vim.api.nvim_buf_get_name(0)
+      if vim.bo.filetype == "oil" then
+        full = require("oil").get_current_dir() or ""
+      end
+      if full ~= "" then
+        local root = vim.fs.root(full, ".git")
+        if root then
+          filename = vim.fn.fnamemodify(full, ":p"):sub(#root + 2)
+        end
+      end
       local location = vim.fn.nr2char(0xf0224) .. " " .. vim.fn.line("$") -- total line count
       local cwd = vim.fn.nr2char(0xf07b) .. " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
@@ -47,6 +59,7 @@ require("mini.statusline").setup({
         "%<", -- truncation point
         { hl = "MiniStatuslineFilename", strings = { cwd } },
         { hl = "MiniStatuslineDevinfo",  strings = { git } },
+        { hl = "MiniStatuslineFilename", strings = { filename } },
         "%=", -- right align everything after this
         { hl = "MiniStatuslineFileinfo", strings = { filetype } },
         { hl = mode_hl,                  strings = { location } },

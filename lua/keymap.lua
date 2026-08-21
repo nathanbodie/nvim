@@ -1,7 +1,16 @@
 vim.g.mapleader = ' '
 local map = vim.keymap.set
 
-map('n', '<leader>n', ':update<CR>:source<CR>')
+map('n', '<leader>R', function()
+  vim.cmd('update')
+  for name, _ in pairs(package.loaded) do
+    if name:match('^keymap') or name:match('^plugins') or name:match('^lsp') then
+      package.loaded[name] = nil
+    end
+  end
+  dofile(vim.env.MYVIMRC)
+  vim.notify('config reloaded')
+end)
 
 -- system clipboard
 map({ 'n', 'v' }, '<leader>y', '"+y')
