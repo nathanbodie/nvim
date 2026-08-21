@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 local map = vim.keymap.set
 
-map('n', '<leader>R', function()
+map('n', '<leader>n', function()
   vim.cmd('update')
   for name, _ in pairs(package.loaded) do
     if name:match('^keymap') or name:match('^plugins') or name:match('^lsp') then
