@@ -26,6 +26,7 @@ vim.pack.add({
   "https://github.com/direnv/direnv.vim",
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/stevearc/conform.nvim",
+  "https://github.com/OXY2DEV/markview.nvim",
 })
 
 -- configure
@@ -89,5 +90,11 @@ require("conform").setup({
     -- These options will be passed to conform.format()
     timeout_ms = 500,
     lsp_format = "fallback",
+  },
+})
+
+require("markview").setup({
+  preview = {
+    enable = false,
   },
 })

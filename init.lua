@@ -29,9 +29,18 @@ map('n', '<leader>f', '<Cmd>Pick files<CR>')
 map('n', '<leader>r', '<Cmd>Pick buffers<CR>')
 map('n', '<leader>/', '<Cmd>Pick grep_live<CR>')
 map('n', '<leader>g', '<Cmd>Pick git_hunks<CR>')
+map('n', '<leader>s', function()
+  MiniExtra.pickers.git_hunks({
+    scope = 'staged',
+  })
+end)
 map('n', '<leader>mh', '<Cmd>Pick help<CR>')
 map('n', '<leader>mk', '<Cmd>Pick keymaps<CR>')
 map('n', '<leader>o', '<Cmd>Oil<CR>')
 map('n', '<leader>e', '<Cmd>lua vim.diagnostic.open_float()<CR>')
+
+-- markdown preview
+map('n', '<leader>mp', '<Cmd>Markview splitToggle<CR>')
+map('n', '<leader>mi', '<Cmd>Markview Toggle<CR>')
 
 vim.cmd.colorscheme("evergarden")
