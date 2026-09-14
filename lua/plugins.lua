@@ -2,6 +2,7 @@
 vim.pack.add({
   -- theme
   { src = "https://codeberg.org/evergarden/nvim.git", name = "evergarden" },
+  "https://github.com/oskarnurm/koda.nvim",
   -- file manager
   "https://github.com/stevearc/oil.nvim",
   -- mini
@@ -27,9 +28,11 @@ vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/OXY2DEV/markview.nvim",
+  "https://github.com/folke/trouble.nvim",
 })
 
 -- configure
+require("koda").setup()
 require('evergarden').setup({
   theme = {
     variant = 'fall', -- 'winter'|'fall'|'spring'|'summer'
@@ -85,6 +88,7 @@ require("blink.cmp").setup({
 
 -- misc
 require("which-key").setup()
+require("trouble").setup()
 require("conform").setup({
   format_on_save = {
     -- These options will be passed to conform.format()
