@@ -37,7 +37,8 @@ vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
       cargo = { allFeatures = true },
-      checkOnSave = { command = 'clippy' },
+      checkOnSave = true,
+      check = { command = 'clippy' },
     },
   },
 })
@@ -77,6 +78,16 @@ vim.lsp.config('nixd', {
   },
 })
 
+-- typst
+vim.lsp.config('tinymist', {
+  cmd = { 'tinymist' },
+  filetypes = { 'typst' },
+  root_markers = { 'typst.toml', '.git' },
+  settings = {
+    formatterMode = 'typstyle',
+  },
+})
+
 vim.lsp.enable({
   'lua_ls',
   'ts_ls',
@@ -85,6 +96,7 @@ vim.lsp.enable({
   'ols',
   'clangd',
   'nixd',
+  'tinymist',
 })
 
 -- re-run LSP attach for open buffers after direnv updates PATH,
